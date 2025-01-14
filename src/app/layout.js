@@ -2,7 +2,7 @@ import './globals.css'
 
 import NavBar from "../components/NavBar";
 import {roboto} from "../app/font"
-import ProductProvider from '@/context/ProductProvider';
+import ProductProvider from "../context/ProductProvider";
 
 export const metadata = {
   title: "DevStyle",

@@ -1,8 +1,12 @@
 "use client"
 import toast, { Toaster } from 'react-hot-toast';
+import { useCart } from "../hooks/useCart.js"
 
-const AddToCart = () => {
+const AddToCart = ({product}) => {
+  const { addToCart } = useCart();
+
     const handleCartAdd = ()=>{
+      addToCart(product)
       toast.success("Item added to cart")
     }
   return (

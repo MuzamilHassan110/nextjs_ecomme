@@ -23,10 +23,20 @@ export async function generateMetadata({ params: { id } }) {
   };
 }
 
+
 const Product1 = async ({ params: { id } }) => {
   const product = await getProductById(id);
   const price = product.default_price.unit_amount / 100;
 
+  const clientProduct = {
+    name: product.name,
+    description: product.description,
+    id: product.id,
+    price: product.default_price.unit_amount,
+    price_id: product.default_price.id,
+    currency: '$',
+    image: product.images[0]
+  }
   return (
     <div className="m-2 px-20">
       <div className="flex justify-around items-center flex-wrap">
@@ -44,7 +54,7 @@ const Product1 = async ({ params: { id } }) => {
             <p className="text-gray-500">Price:</p>
             <p className="text-xl font-semibold">${price}</p>
           </div>
-          <AddToCart />
+          <AddToCart product = { clientProduct }/>
         </div>
       </div>
       <p className="mt-8 text-2xl">{product.description}</p>
