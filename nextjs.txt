@@ -1,0 +1,483 @@
+acct_1Q519AIu0BQ38Kxk
+
+Client side the code is render in bundle.
+server is render the page then it is called serverside rendering.
+in client the content take the time to loade because the broswer take
+time to load the all bundle of js.
+in server side immeditely loade the data by server and then after 
+loade the css content etc 
+event handle, local storage, useCustom Hooks, alert and state cant be know by server component
+in server componet is bandle size is less and no bandle is come in page.js
+
+React Hydreation
+when i console in use client then it will be console in SS AND CS
+and then become the haydreation. go to network and check there is no
+onclick in page content.
+server render the page without intertive and client render again 
+with interctive and this is reactHydreation.
+
+in dev server req is going but in production server the req is not going
+of the link page this is preFetching
+and when i reload the page nextjs understand itself which are links and 
+prefetch its doing request but this req is small amout of the data which is
+undersatand by the next js itself
+
+PreFetching data in next js ?
+when i load the website first time then next js can be cacha itself
+and cant be gone the each request on server.
+if we want to aviod the prfetch due to huge amout of the data then 
+we used the prefetch = {flase} (use in Link tage) 
+mostly not used (using lot time).
+static file auto dedaticate by next js like image etc and this in public.
+
+first install tailwind dev dependence
+postcss transfrom the talwind css using js library using autoprefixer
+
+@tailwind base;// tags h1 
+@tailwind components; //.btn @layer { .btn{ background: red;}} by default empty
+
+@tailwind utilities; // color, flex 
+ 
+these broswer cant be understand it convert into the css.
+
+in inline-block works the margin and padding
+Inline-Block Elements:
+
+Behave like inline elements (stay on the same line as other elements).
+However, you can set their width and height like block elements.
+Example: Useful for creating elements that behave like inline items
+ but have a specific size. 
+
+block div p h
+inline span a strong
+
+font file will be host in next js and not goes to the req
+in server. remove the external req of server
+here we can be used the multiple font, privacy and performance impoverd.
+
+create font.js file
+fonts.js
+
+.env.local if we want a key public then we use like this
+NEXT_PUBLIC_KEY_NAME
+
+issus in stripe to get the price which is not in price and it is set 
+the default price inside the stripe 
+then can you slove by as
+expand: ['object_name.default_price'];
+
+when i get the all project in stripe we use the stripe.list & when 
+i get the signal product basced on the id then use stripe.retrieve(id,
+{
+expand: ['default_price']
+}
+)
+
+SEO
+metadata is an special object which is exter piece of info
+const metadata = {
+title: "",
+descripation: "",
+keywords: ["coding", "short", "dress"]
+}
+
+it can be use the change the title of application individul page
+generateMetadata(params: {slug}){
+call the api function and then return 
+return {
+	title: `base_name | ${product.name}`
+}
+
+There are two ways you can add metadata to your application:
+Config-based Metadata: layout.js or page.js
+File-based Metadata: files to route segments.
+With both these options, Next.js will automatically generate the relevant
+
+when i build then next js make two type of files one is static and server
+its understand itself which is render server or which is static during the build
+when page is server then goes to the req to server otherwies not and show the console
+and static is ready during the build time.
+if we convert the server file into the static then there is no need of the node server 
+and requried only simple server which is run our project.
+this can be done by this fun generateStaticParams() 
+ With generateStaticParams, you can pre-generate these pages during the build process. 
+limitions:
+realtime changes , Stale data (same data until build), build time take more, cant be use the direct Image tage of next js
+advtg: fast, no load on server, cache on cdn pages 
+use => blogs, doucmentation, products, seo
+aviod => dynamic, Complex Data Fetching, Frequent change.
+
+Static Generation (SSG): Pages are built at build time and served as pre-rendered HTML.
+When running next build, Next.js generates an HTML file per route.
+strict SPA into individual HTML files, Next.js can avoid loading unnecessary JavaScript code on the client-side, 
+reducing the bundle size and enabling faster page loads.
+Since Next.js supports this static export, it can be deployed and hosted on any web server that can serve HTML/CSS/JS static assets.
+
+FOR Staitc file we use the npm i -D serve
+script: "serve out"
+out in git ignore /out
+
+SSR
+
+If a page uses Server-side Rendering, the page HTML is generated on each request.
+Dynamic Generation (SSR): Pages are built on each request, fetching data and rendering on the server before sending it to the client.
+This is ideal for pages that need up-to-date data, like dashboards or user-specific content.
+
+Summary:
+
+Static: Fast, pre-built, best for static content. cacha and place the cdn server
+Dynamic: Fresh data on each request, better for frequently changing content.
+
+ESlint:
+ ESLint helps identify and fix problems in your code by enforcing a set of rules for code quality and style.
+Overall, ESLint helps maintain clean, consistent, and error-free code in your Next.js project.
+once it steup then it run auto in every build
+
+In the context of ESLint, terms like "Strict," "Base," and "Cancel" can refer to specific configurations or levels of rule enforcement.
+
+Strict configurations enforce a higher standard of code quality and adhere to stricter rules.
+Base configurations include a minimal set of rules for basic code quality checks.
+Cancel refers to disabling or overriding certain ESLint rules in your configuration file.
+
+Image tage of next => simple html tage of img increase the size of image but use next js optimize and reduce the size of the image
+next js convert the image of any type into WebP which is Smaller File Size, Quality Retention: Maintains high visual quality with reduced file size. Browser Support:
+images not comes from the stripe or anohter source its comes in localhost.
+we set the priority is true in images to aviod the lazy loading.
+it is mostly used for signal image and when more images then we set for signal first base on the conditon
+
+WebP is a modern image format developed by Google that provides both lossy (Smaller file size, reduced qualit) and lossless (Full quality preserved, larger file size)
+ compression for images on the web.
+ It is designed to create smaller, more efficient images compared to older formats like JPEG and PNG while maintaining high visual quality.
+
+<-------------->
+
+Incremental static Regerations ISR
+On the dimaind page will be dynamic or goes to req to server and then make 
+it static  
+
+export const dynamicParams = true
+default is true it will fetch page on run time then make it static page.
+then it have also problems.
+if we want to dynamic behavior of the page with staitc we can be use
+
+export const dynamic = "force-dynamic";
+for this the every page request goes to the server, load server, response time slow
+
+export const revalidate = 30 ;
+this approach is that not hit the api direct it can be achive after 30s
+means goes to the req to server after 30s
+
+<------->
+
+On Dimaind Revalidation (Incremental static Regerations)
+when we upadate then the static pages will be refresh.
+it can be done with the webhooks of the stripe
+
+stripe req in body is string so take it in req.text 
+
+<------>
+Data never changes => Static
+Data changes but same for all user(e.g product detail page) => staic + dynamic
+Data is different for different users(eg- profile page) => dynamic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"use client";
+import React, { useEffect, useState } from "react";
+import AllCard from "./AllCard";
+import { Button } from "@nextui-org/button";
+import Cart from "./Cart";
+import { motion } from "framer-motion";
+import { getAllProjects } from "../../lib/utils/firebaseFunctions"
+
+const titleItems = [
+  "All",
+  "UI/UX",
+  "Web Design",
+  "Developing",
+  "Graphic Design",
+];
+
+const Loader = () => (
+  <div className="flex  justify-center mb-28 h-[50%] bg-[#0F0F0F]">
+      <div className="animate-spin rounded-full h-20 w-20 border-t-8 border-[#06D889] border-solid"></div>
+    </div>
+);
+
+
+const AllTemplate = ({ projects }) => {
+  return (
+    <div className="container mx-auto w-[75%]">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="grid grid-cols-12 gap-4">
+          {projects.map((item, index) => (
+            <React.Fragment key={index}>
+              <AllCard item={item} index={index} />
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const UI_UXTemplate = ({ ui }) => {
+  return (
+    <div className="relative container mx-auto w-[75%] grid grid-cols-12 gap-4">
+      {ui.map((item, index) => (
+        <React.Fragment key={index}>
+          <Cart item={item} index={index} />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+const WebDsigbTemplate = ({ webDesign }) => {
+  return (
+    <div className="relative container mx-auto w-[75%] grid grid-cols-12 gap-4">
+      {webDesign.map((item, index) => (
+        <React.Fragment key={index}>
+          <Cart item={item} index={index} />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+const DevelopingTemplate = ({ developing }) => {
+  return (
+    <div className="relative container mx-auto w-[75%] grid grid-cols-12 gap-4">
+      {developing.map((item, index) => (
+        <React.Fragment key={index}>
+          <Cart item={item} index={index} />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+const GraphicDesignTemplate = ({ graphicDesign }) => {
+  return (
+    <div className="relative container mx-auto w-[75%] grid grid-cols-12 gap-4">
+      {graphicDesign.map((item, index) => (
+        <React.Fragment key={index}>
+          <Cart item={item} index={index} />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+const TitleBar = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [projectData, setProjectData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showIcon, setShowIcon] = useState(false);
+
+  const ui = projectData.filter((item) => item.key === "ux");
+  const webDesign = projectData.filter((item) => item.key === "web");
+  const developing = projectData.filter((item) => item.key === "dev");
+  const graphicDesign = projectData.filter((item) => item.key === "des");
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await getAllProjects();
+        setProjectData(res);
+        if(res.length > 6){
+          setShowIcon(true);
+        }
+      } catch (error) {
+        console.error("Error in Fetching data in App file", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // console.log("Updated data state:", projectData);
+  }, [projectData]);
+  // Log whenever the state changes
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const renderTemplate = () => {
+    switch (activeIndex) {
+      case 0:
+        return <AllTemplate projects={projectData} />;
+      case 1:
+        return <UI_UXTemplate ui={ui} />;
+      case 2:
+        return <WebDsigbTemplate webDesign={webDesign} />;
+      case 3:
+        return <DevelopingTemplate developing={developing} />;
+      case 4:
+        return <GraphicDesignTemplate graphicDesign={graphicDesign} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <>
+      {/* <div className=" grid grid-cols-2 w-[300px] sm:w-[450px] place-items-center text-center place-content-center lg:flex items-center justify-between mb-[60px] bg-[#ffffff0d] lg:rounded-[80px] lg:w-[600px] max-w-[600px]  mx-auto">
+        {titleItems.map((title, index) => (
+          <li
+            key={index}
+            className={`text-center list-none font-medium text-[14px] text-[#e4e4e4] flex items-center px-[20px] py-[10px] rounded-[50px] cursor-pointer ${
+              activeIndex === index ? "bg-[#06D889]" : ""
+            }`}
+            onClick={() => setActiveIndex(index)}
+          >
+            {title}
+          </li>
+        ))}
+      </div> */}
+     <AllTemplate projects={projectData} />
+          
+      {loading ? (
+       
+         <Loader />
+       
+      ) : (
+        <motion.div
+          key={activeIndex}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+        >
+          {/* {renderTemplate()} */}
+
+         {showIcon && 
+          <div className="flex justify-center items-center py-10">
+          <Button
+            type="submit"
+            className="button-after text-sm  rounded-[5px] bg-[#06d889] p-[12px_40px] font-semibold h-10 text-center inline-block transition-[0.5s] relative overflow-hidden z-[1] "
+          >
+            Load More
+          </Button>
+        </div>
+         }
+        </motion.div>
+      )}
+    </>
+  );
+};
+
+export default TitleBar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
