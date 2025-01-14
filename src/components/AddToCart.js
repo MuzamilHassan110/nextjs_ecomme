@@ -7,7 +7,7 @@ const AddToCart = ({product}) => {
 
     const handleCartAdd = ()=>{
       addToCart(product)
-      toast.success("Item added to cart")
+      toast.success(`${product.name} Item added to cart`)
     }
   return (
     <div>
