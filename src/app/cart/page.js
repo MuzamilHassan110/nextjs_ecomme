@@ -5,8 +5,12 @@ import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
 import { handleCheckOutService } from "../services/checkOutService";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { redirect } from 'next/navigation'
 
 const page = () => {
+ 
   const {
     price,
     cartCount,
@@ -26,9 +30,10 @@ const page = () => {
     });
     const url = await handleCheckOutService(body);
     if (url) {
-      window.location.href = url;
+      redirect(url)
     } else {
       console.error("Failed to retrieve Stripe URL.");
+      
     }
   };
 
