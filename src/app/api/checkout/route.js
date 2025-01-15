@@ -3,7 +3,7 @@ import { stripe } from "@/app/utils/stripe";
 export async function POST(req) {
   try {
     const body = await req.json();
-  
+
     const session = await stripe.checkout.sessions.create({
       line_items: body,
       mode: "payment",
