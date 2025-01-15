@@ -4,10 +4,27 @@ import { TrashIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import Image from 'next/image'
+import { handleCheckOutService } from '../services/checkOutService'
+
 const page = () => {
     const {price, cartCount, cartItem, IncrementProduct, dececrementProduct, deleteProduct, deleteProductById } = useCart();    
     
+const handleCheckOut = async() => {
+        const body = cartItem.map(item => {
+            return {                
+                quantity: item.quantity,
+                price: item.price_id,        
 
+            }
+        })
+    const url =  await handleCheckOutService(body);
+    if(url){
+        window.location.href = url;
+    }else {
+        console.error("Failed to retrieve Stripe URL.");
+    }
+    
+}
   
     return (
         <div className='m-5 px-20'>
@@ -61,7 +78,7 @@ const page = () => {
                             <p className='text-xl'>
                                 Total <span className='font-bold text-green-500'>{price}</span>
                             </p>
-                            <button className='mt-4 py-2 px-6 bg-orange-500 text-white hover:bg-red-600 rounded-md'>
+                            <button onClick={handleCheckOut} className='mt-4 py-2 px-6 bg-orange-500 text-white hover:bg-red-600 rounded-md'>
                                 Checkout
                             </button>
                         </div>

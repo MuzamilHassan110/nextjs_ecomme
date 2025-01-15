@@ -178,8 +178,9 @@ stripe req in body is string so take it in req.text
 <------>
 Data never changes => Static
 Data changes but same for all user(e.g product detail page) => staic + dynamic
-Data is different for different users(eg- profile page) => dynamic
+Data is different for different users(eg- profile page, profile page) => dynamic
 
+<------->
 
 
 
